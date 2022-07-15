@@ -4,6 +4,8 @@ import { Button } from '@mui/material';
 const Timer = ({ passedTime }) => {
   const [minutes, seconds, setPause, t, resume] = useCountdown(passedTime);
 
+  const zeroPad = (num, places) => String(num).padStart(places, '0');
+
   return (
     <div>
       {minutes + seconds <= 0 ? (
@@ -11,7 +13,7 @@ const Timer = ({ passedTime }) => {
       ) : (
         <div>
           <h1>
-            {minutes}:{seconds}
+            {zeroPad(minutes, 2)}:{zeroPad(seconds, 2)}
           </h1>
           <div className="buttons-container">
             <Button
