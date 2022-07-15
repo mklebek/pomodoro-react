@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react';
 
 const Timer = () => {
+  let intervalRef;
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  const [distance, setDistance] = useState(0);
+  const [distance, setDistance] = useState(1);
 
   useEffect(() => {
-    setInterval(timer, 1000);
+    intervalRef = setInterval(timer, 1000);
+    if (distance <= 0) {
+      clearInterval(intervalRef);
+    }
+
+    return () => clearInterval(intervalRef);
   }, []);
 
   const countDownDate = new Date('Jan 5, 2024 15:37:25').getTime();
