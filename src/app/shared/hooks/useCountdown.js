@@ -6,24 +6,29 @@ const useCountdown = (targetDate) => {
   const [countDown, setCountDown] = useState(
     countDownDate - new Date().getTime()
   );
+  const [pause, setPause] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCountDown(countDownDate - new Date().getTime());
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, [countDownDate]);
+    if (pause) {
+      clearInterval(interval);
+    }
 
-  return getReturnValues(countDown);
+    return () => clearInterval(interval);
+  }, [pause, countDownDate]);
+
+  return getReturnValues(countDown, setPause);
 };
 
-const getReturnValues = (countDown) => {
+const getReturnValues = (countDown, setPause) => {
   // calculate time left
   const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((countDown % (1000 * 60)) / 1000);
 
-  return [minutes, seconds];
+  return [minutes, seconds, setPause];
 };
 
 export { useCountdown };

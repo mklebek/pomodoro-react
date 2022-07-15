@@ -1,0 +1,4 @@
+.Timer .buttons-container {
+  display: flex;
+  justify-content: center;
+}
