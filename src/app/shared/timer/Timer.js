@@ -1,7 +1,6 @@
 import { useCountdown } from '../hooks/useCountdown';
 
-const Timer = () => {
-  const countDownDate = new Date('Jan 5, 2024 15:37:25');
+const Timer = ({ countDownDate }) => {
   const [minutes, seconds] = useCountdown(countDownDate);
 
   return (
