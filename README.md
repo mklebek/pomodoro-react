@@ -1,3 +1,5 @@
+# Application for time tracking using the [Pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique) technique
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
