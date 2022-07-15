@@ -11,20 +11,20 @@ const useCountdown = (passedTime) => {
   );
 
   const [pause, setPause] = useState(false);
-  const [left, setLeft] = useState(countDownDate);
+  const [remainingTime, setRemainingTime] = useState(countDownDate);
 
   const pauseClock = () => {
     if (!pause) {
-      const [a, b, c, t] = getReturnValues(countDown);
+      const [, , , , total] = getReturnValues(countDown);
       setPause(true);
-      setLeft(t);
+      setRemainingTime(total);
     }
   };
 
   const resumeClock = () => {
     if (pause) {
       setPause(false);
-      setCountDownDate(new Date().getTime() + left);
+      setCountDownDate(new Date().getTime() + remainingTime);
     }
   };
 
@@ -51,7 +51,7 @@ const getReturnValues = (countDown, setPause, setResume) => {
   const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((countDown % (1000 * 60)) / 1000);
 
-  return [minutes, seconds, setPause, total, setResume];
+  return [minutes, seconds, setPause, setResume, total];
 };
 
 export { useCountdown };

@@ -2,7 +2,7 @@ import { useCountdown } from '../hooks/useCountdown';
 import { Button } from '@mui/material';
 
 const Timer = ({ passedTime }) => {
-  const [minutes, seconds, setPause, t, resume] = useCountdown(passedTime);
+  const [minutes, seconds, pause, resume] = useCountdown(passedTime);
 
   const zeroPad = (num, places) => String(num).padStart(places, '0');
 
@@ -20,7 +20,7 @@ const Timer = ({ passedTime }) => {
               variant="contained"
               color="success"
               size="large"
-              onClick={() => resume(false)}
+              onClick={() => resume()}
             >
               START
             </Button>
@@ -28,7 +28,7 @@ const Timer = ({ passedTime }) => {
               variant="contained"
               color="primary"
               size="large"
-              onClick={() => setPause(true)}
+              onClick={() => pause()}
             >
               PAUSE
             </Button>
