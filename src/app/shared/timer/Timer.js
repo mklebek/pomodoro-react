@@ -1,8 +1,8 @@
 import { useCountdown } from '../hooks/useCountdown';
 import { Button } from '@mui/material';
 
-const Timer = ({ countDownDate }) => {
-  const [minutes, seconds, setPause] = useCountdown(countDownDate);
+const Timer = ({ passedTime }) => {
+  const [minutes, seconds, setPause, t, resume] = useCountdown(passedTime);
 
   return (
     <div>
@@ -18,7 +18,7 @@ const Timer = ({ countDownDate }) => {
               variant="contained"
               color="success"
               size="large"
-              onClick={() => setPause(false)}
+              onClick={() => resume(false)}
             >
               START
             </Button>
