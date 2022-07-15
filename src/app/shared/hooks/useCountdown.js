@@ -9,18 +9,23 @@ const useCountdown = (passedTime) => {
   const [countDown, setCountDown] = useState(
     countDownDate - new Date().getTime()
   );
+
   const [pause, setPause] = useState(false);
   const [left, setLeft] = useState(countDownDate);
 
   const pauseClock = () => {
-    const [a, b, c, t] = getReturnValues(countDownDate);
-    setPause(true);
-    setLeft(t);
+    if (!pause) {
+      const [a, b, c, t] = getReturnValues(countDown);
+      setPause(true);
+      setLeft(t);
+    }
   };
 
   const resumeClock = () => {
-    setPause(false);
-    setCountDownDate(new Date().getTime() + left);
+    if (pause) {
+      setPause(false);
+      setCountDownDate(new Date().getTime() + left);
+    }
   };
 
   useEffect(() => {
