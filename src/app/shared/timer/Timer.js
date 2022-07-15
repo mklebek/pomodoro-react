@@ -1,37 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useCountdown } from '../hooks/useCountdown';
 
 const Timer = () => {
-  let intervalRef;
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-  const [distance, setDistance] = useState(1);
-
-  useEffect(() => {
-    intervalRef = setInterval(timer, 1000);
-    if (distance <= 0) {
-      clearInterval(intervalRef);
-    }
-
-    return () => clearInterval(intervalRef);
-  }, []);
-
-  const countDownDate = new Date('Jan 5, 2024 15:37:25').getTime();
-
-  function timer() {
-    // Get today's date and time
-    const now = new Date().getTime();
-
-    // Find the distance between now and the count down date
-    const distance = countDownDate - now;
-
-    // Time calculations for minutes and seconds
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    setMinutes(minutes);
-    setSeconds(seconds);
-    setDistance(distance);
-  }
+  const countDownDate = new Date('Jan 5, 2024 15:37:25');
+  const [minutes, seconds] = useCountdown(countDownDate);
 
   return (
     <h1>
