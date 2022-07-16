@@ -15,7 +15,7 @@ const useCountdown = (passedTime) => {
 
   const pauseClock = () => {
     if (!pause) {
-      const [, , , , total] = getReturnValues(countDown);
+      const [, , , , , total] = getReturnValues(countDown);
       setPause(true);
       setRemainingTime(total);
     }
@@ -26,6 +26,10 @@ const useCountdown = (passedTime) => {
       setPause(false);
       setCountDownDate(new Date().getTime() + remainingTime);
     }
+  };
+
+  const resetClock = () => {
+    setCountDownDate(new Date().getTime() + timeInMinutes);
   };
 
   useEffect(() => {
@@ -42,16 +46,16 @@ const useCountdown = (passedTime) => {
     return () => clearInterval(interval);
   }, [pause, countDownDate]);
 
-  return getReturnValues(countDown, pauseClock, resumeClock);
+  return getReturnValues(countDown, pauseClock, resumeClock, resetClock);
 };
 
-const getReturnValues = (countDown, setPause, setResume) => {
+const getReturnValues = (countDown, setPause, setResume, reset) => {
   // calculate time left
   const total = countDown;
   const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((countDown % (1000 * 60)) / 1000);
 
-  return [minutes, seconds, setPause, setResume, total];
+  return [minutes, seconds, setPause, setResume, reset, total];
 };
 
 export { useCountdown };
