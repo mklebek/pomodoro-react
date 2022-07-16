@@ -1,3 +1,4 @@
+import './Timer.css';
 import { useCountdown } from '../hooks/useCountdown';
 import { Button } from '@mui/material';
 
@@ -7,7 +8,7 @@ const Timer = ({ passedTime }) => {
   const zeroPad = (num, places) => String(num).padStart(places, '0');
 
   return (
-    <div>
+    <div className="Timer">
       {minutes + seconds <= 0 ? (
         <h1>Expired!</h1>
       ) : (
